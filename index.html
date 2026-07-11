@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -161,9 +162,17 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .dynamic-section {
@@ -382,6 +391,7 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -413,15 +423,18 @@
             .form-wrapper {
                 padding: 30px;
             }
+
             .form-grid {
                 grid-template-columns: 1fr;
             }
+
             .export-options {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -527,7 +540,7 @@
                             <label>
                                 <span class="label-icon">📄</span>
                                 Documentación con la que cuenta
-                                <span class="label-hint">Liste todos los documentos disponibles (contratos, correos, sentencias, etc.)</span>
+                                <span class="label-hint">Liste todos los documentos disponibles (contratos, correos, sentencias, partidas civiles, etc.)</span>
                             </label>
                             <textarea id="documentacion-inicial" name="documentacion_inicial" placeholder="Ej: Contrato de compraventa, correspondencia por email, fotografías, etc."></textarea>
                         </div>
@@ -741,10 +754,11 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 Abogados Forenses. Lic. Azua - lic.azua@abogadosforenses.org</p>
-            <p>&copy; Focus24x7 | Disponibles para consultas y asesoría legal profesional</p>
+            <p>&copy; Focus24x7 | Eticamente Intrusivos | Disponibles para consultas y asesoría legal profesional</p>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
