@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expediente Legal - Abogados Forenses</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos mejorados para la aplicación */
+        .main-container {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .form-wrapper {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-card);
+            padding: 50px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--color-gold);
+        }
+
+        .section-number {
+            background: var(--color-dark);
+            color: var(--color-gold);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .section-info {
+            flex: 1;
+        }
+
+        .section-info h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--color-heading);
+        }
+
+        .section-info p {
+            margin: 5px 0 0 0;
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .form-grid.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-heading);
+        }
+
+        .label-icon {
+            font-size: 1.2rem;
+        }
+
+        .label-hint {
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: none;
+            color: var(--color-text-light);
+            display: block;
+            margin-top: 3px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="date"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-input);
+            font-family: var(--font-main);
+            font-size: 15px;
+            color: var(--color-text);
+            background: var(--color-bg-alt);
+            transition: all var(--transition);
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--color-gold);
+            background: var(--color-bg);
+            box-shadow: 0 0 0 3px rgba(245, 200, 0, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .voice-btn {
+            background: var(--color-blue);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: var(--radius-btn);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition);
+        }
+
+        .voice-btn:hover {
+            background: var(--color-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(71, 193, 254, 0.3);
+        }
+
+        .voice-btn.recording {
+            background: #ff4b2b;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .dynamic-section {
+            border: 2px dashed var(--color-gold);
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: var(--radius-input);
+            background: rgba(245, 200, 0, 0.03);
+            position: relative;
+        }
+
+        .dynamic-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .dynamic-section-label {
+            font-weight: 700;
+            color: var(--color-gold);
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .remove-btn {
+            background: #ff4b2b;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .remove-btn:hover {
+            background: #e63a1a;
+        }
+
+        .add-more-btn {
+            background: var(--color-gold);
+            color: var(--color-dark);
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius-btn);
+            cursor: pointer;
+            font-weight: 700;
+            margin-top: 15px;
+            width: 100%;
+            transition: all var(--transition);
+            font-size: 14px;
+        }
+
+        .add-more-btn:hover {
+            background: var(--color-heading);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-divider {
+            margin: 50px 0;
+            border: 0;
+            border-top: 2px solid var(--color-border-light);
+            position: relative;
+        }
+
+        .section-divider::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--color-gold);
+            border-radius: 50%;
+        }
+
+        .export-section {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid var(--color-border-light);
+        }
+
+        .export-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-heading);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .export-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .export-btn {
+            padding: 14px 20px;
+            border-radius: var(--radius-btn);
+            border: 2px solid var(--color-dark);
+            background: white;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .export-btn:hover {
+            background: var(--color-dark);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .export-btn.whatsapp {
+            border-color: #25d366;
+            color: #25d366;
+        }
+
+        .export-btn.whatsapp:hover {
+            background: #25d366;
+            color: white;
+        }
+
+        .export-btn.email {
+            border-color: #ea4335;
+            color: #ea4335;
+        }
+
+        .export-btn.email:hover {
+            background: #ea4335;
+            color: white;
+        }
+
+        .export-btn.pdf {
+            border-color: #f5c800;
+            color: var(--color-dark);
+        }
+
+        .export-btn.pdf:hover {
+            background: var(--color-gold);
+        }
+
+        .info-box {
+            background: rgba(71, 193, 254, 0.1);
+            border-left: 4px solid var(--color-blue);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--color-text);
+        }
+
+        .info-box strong {
+            color: var(--color-blue);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--color-gold);
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: none;
+            cursor: pointer;
+        }
+
+        .success-message {
+            display: none;
+            background: #4caf50;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .progress-indicator {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--color-border-light);
+            transition: all var(--transition);
+        }
+
+        .progress-dot.active {
+            background: var(--color-gold);
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .form-wrapper {
+                padding: 30px;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .export-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>ABOGADOS <span>FORENSES</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="current"><a href="#">Expediente Legal</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-container" style="margin-top: 40px; margin-bottom: 80px;">
+        <div class="form-wrapper">
+            <div class="progress-indicator">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+            </div>
+
+            <div class="success-message" id="success-message">
+                ✓ Información guardada correctamente. Proceda a exportar.
+            </div>
+
+            <form id="legal-form">
+                <!-- SECCIÓN 1: DATOS DEL CLIENTE -->
+                <div class="section-container" id="section-1">
+                    <div class="section-header">
+                        <div class="section-number">I</div>
+                        <div class="section-info">
+                            <h2>Datos Generales del Cliente</h2>
+                            <p>Información personal y contexto del caso que requiere asesoría legal</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>📋 Instrucciones:</strong> Complete todos los campos con la información del cliente. Estos datos son fundamentales para identificar al solicitante y establecer la relación abogado-cliente.
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">👤</span>
+                                Nombre Completo
+                                <span class="label-hint">Nombre y apellidos</span>
+                            </label>
+                            <input type="text" id="cliente-nombre" name="cliente_nombre" placeholder="Ej: Juan Carlos Pérez García" required>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">📱</span>
+                                Teléfono de Contacto
+                                <span class="label-hint">Formato: +34 XXX XXX XXX</span>
+                            </label>
+                            <input type="tel" id="cliente-telefono" name="cliente_telefono" placeholder="+34 XXX XXX XXX" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">📧</span>
+                                Email de Contacto
+                                <span class="label-hint">Correo electrónico válido</span>
+                            </label>
+                            <input type="email" id="cliente-email" name="cliente_email" placeholder="correo@ejemplo.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">📍</span>
+                                Domicilio
+                                <span class="label-hint">Dirección completa</span>
+                            </label>
+                            <input type="text" id="cliente-domicilio" name="cliente_domicilio" placeholder="Calle, número, ciudad, código postal">
+                        </div>
+                    </div>
+
+                    <div class="form-grid full">
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">⚖️</span>
+                                Tipo de Asunto / Asesoría Requerida
+                                <span class="label-hint">Seleccione la categoría principal del caso</span>
+                            </label>
+                            <select id="tipo-asunto" name="tipo_asunto" required>
+                                <option value="">-- Seleccione un tipo de asunto --</option>
+                                <option value="civil">Civil (Contratos, responsabilidad civil, etc.)</option>
+                                <option value="penal">Penal (Delitos, defensa, etc.)</option>
+                                <option value="familiar">Familiar (Divorcio, custodia, herencia, etc.)</option>
+                                <option value="laboral">Laboral (Despido, conflictos laborales, etc.)</option>
+                                <option value="mercantil">Mercantil (Sociedades, competencia, etc.)</option>
+                                <option value="administrativo">Administrativo (Recursos, sanciones, etc.)</option>
+                                <option value="inmobiliario">Inmobiliario (Compraventa, arrendamiento, etc.)</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-grid full">
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">📄</span>
+                                Documentación con la que cuenta
+                                <span class="label-hint">Liste todos los documentos disponibles (contratos, correos, sentencias, etc.)</span>
+                            </label>
+                            <textarea id="documentacion-inicial" name="documentacion_inicial" placeholder="Ej: Contrato de compraventa, correspondencia por email, fotografías, etc."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-grid full">
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">📝</span>
+                                Resumen del Caso (Teclado o Voz)
+                                <span class="label-hint">Describa brevemente la situación, antecedentes y lo que busca resolver</span>
+                            </label>
+                            <textarea id="resumen-caso" name="resumen_caso" placeholder="Cuéntenos qué sucedió, cuándo, con quién y qué desea lograr..."></textarea>
+                            <button type="button" class="voice-btn" id="start-voice">
+                                <span>🎤</span> Iniciar Dictado por Voz
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-grid full">
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">⏰</span>
+                                Urgencia del Caso
+                                <span class="label-hint">¿Cuál es la prioridad?</span>
+                            </label>
+                            <select id="urgencia" name="urgencia">
+                                <option value="baja">Baja - Puede esperar</option>
+                                <option value="media">Media - Próximas semanas</option>
+                                <option value="alta">Alta - Próximos días</option>
+                                <option value="urgente">Urgente - Inmediato</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="extra-fields-1"></div>
+                    <button type="button" class="add-more-btn" onclick="addExtraField(1)">+ Agregar más información del cliente</button>
+                </div>
+
+                <hr class="section-divider">
+
+                <!-- SECCIÓN 2: INFORMACIÓN DE LA CONTRAPARTE -->
+                <div class="section-container" id="section-2">
+                    <div class="section-header">
+                        <div class="section-number">II</div>
+                        <div class="section-info">
+                            <h2>Información de la Contraparte</h2>
+                            <p>Datos de la otra parte involucrada en el conflicto o transacción</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>📋 Instrucciones:</strong> Proporcione todos los detalles conocidos sobre la contraparte. Si no conoce algún dato, déjelo en blanco. Esta información es crucial para identificar y localizar a la otra parte.
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">👥</span>
+                                Nombre de la Contraparte
+                                <span class="label-hint">Nombre completo o razón social</span>
+                            </label>
+                            <input type="text" id="contraparte-nombre" name="contraparte_nombre" placeholder="Ej: María López García o Empresa S.L.">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">🆔</span>
+                                DNI/NIF/CIF de la Contraparte
+                                <span class="label-hint">Documento de identidad</span>
+                            </label>
+                            <input type="text" id="contraparte-dni" name="contraparte_dni" placeholder="Ej: 12345678A o A12345678">
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">📍</span>
+                                Domicilio de la Contraparte
+                                <span class="label-hint">Dirección completa si se conoce</span>
+                            </label>
+                            <input type="text" id="contraparte-domicilio" name="contraparte_domicilio" placeholder="Calle, número, ciudad, código postal">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">📞</span>
+                                Contacto de la Contraparte
+                                <span class="label-hint">Teléfono o email si se dispone</span>
+                            </label>
+                            <input type="text" id="contraparte-contacto" name="contraparte_contacto" placeholder="Teléfono o email">
+                        </div>
+                    </div>
+
+                    <div class="form-grid full">
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">🔗</span>
+                                Relación con el Cliente
+                                <span class="label-hint">¿Cómo se conocen o cuál es la relación?</span>
+                            </label>
+                            <select id="contraparte-relacion" name="contraparte_relacion">
+                                <option value="">-- Seleccione la relación --</option>
+                                <option value="familiar">Familiar</option>
+                                <option value="laboral">Laboral</option>
+                                <option value="comercial">Comercial / Empresa</option>
+                                <option value="vecinal">Vecinal</option>
+                                <option value="desconocida">Desconocida / Tercero</option>
+                                <option value="otra">Otra</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-grid full">
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">📋</span>
+                                Descripción de la Contraparte
+                                <span class="label-hint">Información adicional: ocupación, empresa, antecedentes conocidos, etc.</span>
+                            </label>
+                            <textarea id="contraparte-descripcion" name="contraparte_descripcion" placeholder="Cualquier información que ayude a identificar o caracterizar a la contraparte..."></textarea>
+                        </div>
+                    </div>
+
+                    <div id="extra-fields-2"></div>
+                    <button type="button" class="add-more-btn" onclick="addExtraField(2)">+ Agregar más información de la contraparte</button>
+                </div>
+
+                <hr class="section-divider">
+
+                <!-- SECCIÓN 3: DOCUMENTACIÓN ADJUNTA -->
+                <div class="section-container" id="section-3">
+                    <div class="section-header">
+                        <div class="section-number">III</div>
+                        <div class="section-info">
+                            <h2>Descripción de Documentación</h2>
+                            <p>Detalle de pruebas, evidencias y documentos que acompañan el expediente</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>📋 Instrucciones:</strong> Describa cada documento que acompañará el expediente. Indique el tipo, fecha, relevancia y cualquier observación importante para el análisis del caso.
+                    </div>
+
+                    <div class="form-grid full">
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">📄</span>
+                                Documentación Principal
+                                <span class="label-hint">Describa los documentos clave del caso</span>
+                            </label>
+                            <textarea id="doc-descripcion" name="doc_descripcion" placeholder="Ej: Contrato de compraventa (15/03/2023), Correos de reclamación (20/05/2023), Fotografías de daños (22/05/2023)..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-grid full">
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">🔍</span>
+                                Análisis Preliminar de Documentos
+                                <span class="label-hint">¿Qué pruebas considera más importantes? ¿Hay documentos faltantes?</span>
+                            </label>
+                            <textarea id="doc-analisis" name="doc_analisis" placeholder="Indique qué documentos considera críticos y si falta alguno importante..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-grid full">
+                        <div class="form-group">
+                            <label>
+                                <span class="label-icon">⚠️</span>
+                                Observaciones y Consideraciones Especiales
+                                <span class="label-hint">Información relevante sobre plazos, limitaciones, o aspectos especiales</span>
+                            </label>
+                            <textarea id="doc-observaciones" name="doc_observaciones" placeholder="Ej: Plazo de prescripción vence en 6 meses, hay testigos disponibles, etc."></textarea>
+                        </div>
+                    </div>
+
+                    <div id="extra-fields-3"></div>
+                    <button type="button" class="add-more-btn" onclick="addExtraField(3)">+ Agregar más documentación</button>
+                </div>
+
+                <!-- SECCIÓN DE EXPORTACIÓN -->
+                <div class="export-section">
+                    <h3 class="export-title">
+                        <span>📤</span> Opciones de Exportación
+                    </h3>
+                    <p style="color: var(--color-text-light); margin-bottom: 20px;">
+                        Envíe el expediente a través de su canal preferido o imprímalo para archivo físico.
+                    </p>
+                    <div class="export-options">
+                        <button type="button" class="export-btn whatsapp" onclick="exportToWhatsApp()">
+                            <span>💬</span> WhatsApp
+                        </button>
+                        <button type="button" class="export-btn email" onclick="exportToEmail()">
+                            <span>📧</span> Email
+                        </button>
+                        <button type="button" class="export-btn pdf" onclick="window.print()">
+                            <span>🖨️</span> Imprimir / PDF
+                        </button>
+                        <button type="button" class="export-btn" onclick="exportToFormat('md')">
+                            <span>📝</span> Markdown
+                        </button>
+                        <button type="button" class="export-btn" onclick="exportToFormat('html')">
+                            <span>🌐</span> HTML
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Abogados Forenses. Lic. Azua - lic.azua@abogadosforenses.org</p>
+            <p>Tel: 3337 785120 | Disponibles para consultas y asesoría legal profesional</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
