@@ -50,5 +50,5 @@ La aplicación utiliza la paleta de colores oficial de **Abogados Forenses**:
 **Contacto:** lic.azua@abogadosforenses.org  
 **Teléfono:** 3337 785120
 
-*Focus24x7 AI — NEM México — Ollama local — Ciclo 2024-2026*
+*Focus24x7 AI — NEM México — AI local — Ciclo 2024-2026*
 
