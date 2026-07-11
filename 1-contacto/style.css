@@ -10,21 +10,21 @@
 
 /* ── Variables globales ───────────────────────────────────── */
 :root {
-    --color-bg:        #ffffff;
-    --color-bg-alt:    #f8f8f6;
-    --color-dark:      #0e0e0f;
+    --color-bg: #ffffff;
+    --color-bg-alt: #f8f8f6;
+    --color-dark: #0e0e0f;
     --color-dark-card: #161618;
     --color-border-dark: #2a2a2d;
     --color-border-light: #e5e5e5;
-    --color-text:      #333333;
-    --color-text-light:#666666;
-    --color-heading:   #111111;
-    --color-gold:      #f5c800;
-    --color-blue:      #47c1fe;
-    --color-white:     #ffffff;
+    --color-text: #333333;
+    --color-text-light: #666666;
+    --color-heading: #111111;
+    --color-gold: #f5c800;
+    --color-blue: #47c1fe;
+    --color-white: #ffffff;
 
-    --radius-card:  16px;
-    --radius-btn:   999px;
+    --radius-card: 16px;
+    --radius-btn: 999px;
     --radius-input: 8px;
 
     --font-main: 'Plus Jakarta Sans', Arial, sans-serif;
@@ -62,16 +62,29 @@ body {
 }
 
 /* ── Tipografía ───────────────────────────────────────────── */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: var(--color-heading);
     font-weight: 700;
     line-height: 1.15;
     letter-spacing: -0.02em;
 }
 
-h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); }
-h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
-h3 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); }
+h1 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+}
+
+h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+h3 {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+}
 
 p {
     font-size: 1rem;
@@ -307,7 +320,7 @@ section h2 em {
     margin-bottom: 12px;
 }
 
-.services > .container > p {
+.services>.container>p {
     color: var(--color-text-light);
     max-width: 640px;
     margin: 0 auto 48px auto;
@@ -385,7 +398,7 @@ section h2 em {
     margin-bottom: 12px;
 }
 
-.contact-form-section > .container > p {
+.contact-form-section>.container>p {
     color: var(--color-text-light);
     margin-bottom: 48px;
 }
@@ -554,10 +567,10 @@ footer a:hover {
     max-height: 0;
     opacity: 0;
     transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.45s ease;
+        opacity 0.45s ease;
 }
 
-#psToggle2:checked ~ .ps-collapse {
+#psToggle2:checked~.ps-collapse {
     max-height: 3000px;
     opacity: 1;
 }
@@ -603,22 +616,58 @@ footer a:hover {
     transition: transform 0.3s ease;
 }
 
-.ps-lbl-mas  { display: inline; }
-.ps-lbl-menos { display: none; }
+.ps-lbl-mas {
+    display: inline;
+}
 
-#psToggle2:checked ~ .ps-collapse + .ps-btn-wrap .ps-lbl-mas  { display: none; }
-#psToggle2:checked ~ .ps-collapse + .ps-btn-wrap .ps-lbl-menos { display: inline; }
-#psToggle2:checked ~ .ps-collapse + .ps-btn-wrap .ps-icon svg  { transform: rotate(180deg); }
+.ps-lbl-menos {
+    display: none;
+}
+
+#psToggle2:checked~.ps-collapse+.ps-btn-wrap .ps-lbl-mas {
+    display: none;
+}
+
+#psToggle2:checked~.ps-collapse+.ps-btn-wrap .ps-lbl-menos {
+    display: inline;
+}
+
+#psToggle2:checked~.ps-collapse+.ps-btn-wrap .ps-icon svg {
+    transform: rotate(180deg);
+}
 
 /* ── Utilidades ───────────────────────────────────────────── */
-.text-gold    { color: var(--color-gold); }
-.text-muted   { color: var(--color-text-light); }
-.text-center  { text-align: center; }
-.mt-sm        { margin-top: 16px; }
-.mt-md        { margin-top: 32px; }
-.mt-lg        { margin-top: 56px; }
-.mb-sm        { margin-bottom: 16px; }
-.mb-md        { margin-bottom: 32px; }
+.text-gold {
+    color: var(--color-gold);
+}
+
+.text-muted {
+    color: var(--color-text-light);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-sm {
+    margin-top: 16px;
+}
+
+.mt-md {
+    margin-top: 32px;
+}
+
+.mt-lg {
+    margin-top: 56px;
+}
+
+.mb-sm {
+    margin-bottom: 16px;
+}
+
+.mb-md {
+    margin-bottom: 32px;
+}
 
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 900px) {
@@ -663,6 +712,7 @@ footer a:hover {
 }
 
 @media (max-width: 480px) {
+
     header #branding h1,
     header .logo a {
         font-size: 1.1rem;
@@ -679,6 +729,7 @@ footer a:hover {
 
 /* ── Accesibilidad ────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
